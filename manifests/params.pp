@@ -1,33 +1,46 @@
-class foreman::params {
+class foreman::params(
+  fqdn = $fqdn,
 
-# Basic configurations
-  $foreman_url  = "http://${fqdn}"
   # Should foreman act as an external node classifier (manage puppet class assignments)
-  $enc          = true
+  enc = true,
+  
   # Should foreman receive reports from puppet
-  $reports      = true
+  reports = true,
+
   # Should foreman recive facts from puppet
-  $facts        = true
+  facts = true,
+
   # Do you use storeconfig (and run foreman on the same database) ? (note: not required)
-  $storeconfigs = false
+  storeconfigs = false,
+
   # should foreman manage host provisioning as well
-  $unattended   = true
+  unattended = true,
+
   # Enable users authentication (default user:admin pw:changeme)
-  $authentication = false
+  authentication = false,
+
   # configure foreman via apache and passenger
-  $passenger    = true
+  passenger = true,
+
   # force SSL (note: requires passenger)
-  $ssl          = true
+  ssl = true,
 
-# Advance configurations - no need to change anything here by default
+  # advanced configuration - no need to change anything here by default
   # allow usage of test / RC rpms as well
-  $use_testing = true
-  $railspath   = "/usr/share"
-  $app_root    = "${railspath}/foreman"
-  $user        = "foreman"
-  $environment = "production"
+  use_testing = true,
+  railspath = '/usr/share',
+  app_root = '$railspath/foreman',
+  user = 'foreman',
+  environment = 'production',
 
-  # OS specific paths
+  # os specific paths
+  puppet_home = '/var/lib/puppet',
+) {
+  if $ssl {
+    $foreman_url = "https://$fqdn"
+  } else {
+    $foreman_url = "http://$fqdn"
+  }
   case $operatingsystem {
     redhat,centos,fedora: {
        $puppet_basedir  = "/usr/lib/ruby/site_ruby/1.8/puppet"
@@ -38,5 +51,4 @@ class foreman::params {
        $apache_conf_dir = "/etc/apache2/conf.d/foreman.conf"
     }
   }
-  $puppet_home = "/var/lib/puppet"
 }
