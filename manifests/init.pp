@@ -14,9 +14,9 @@
 
 class foreman {
   Class['foreman'] <- Class['xinetd']
-  Class['foreman'] <- Class['tftpf']
+  Class['foreman'] <- Class['tftpd']
 
-  require foreman::params
+  include foreman::params
   include foreman::yumrepo
 
   package{'foreman':

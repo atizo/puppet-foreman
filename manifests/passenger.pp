@@ -1,5 +1,6 @@
 class foreman::config::passenger {
   Class['foreman::config::passenger'] <- Class['apache']
+  Class['foreman::config::passenger'] <- Class['passenger']
   Class['foreman::config::passenger'] <- Class['foreman']
 
   apache::vhost::generator{"${foreman::params::fqdn}.conf":
