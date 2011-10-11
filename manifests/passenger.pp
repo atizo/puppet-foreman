@@ -3,13 +3,13 @@ class foreman::passenger() {
   Class['foreman::passenger'] <- Class['foreman']
 
   apache::vhost::generator{"${foreman::params::fqdn}.conf":
-    http_port => $foreman::params::http_port,
     http => {
       'ServerName' => $foreman::params::fqdn,
       'DocumentRoot' => "$foreman::params::app_root/public",
       'RailsAutoDetect' => 'On',
       'AddDefaultCharset' => 'UTF-8',
     },
+    http_port => $foreman::params::http_port,
     notify => Service['apache'],
   }
 
