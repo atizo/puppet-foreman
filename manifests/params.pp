@@ -34,7 +34,7 @@ class foreman::params(
   environment = 'production',
 
   # os specific paths
-  puppet_home = '/var/lib/puppet',
+  puppet_home = '/var/lib/puppet'
 ) {
   if $ssl {
     $foreman_url = "https://$fqdn"

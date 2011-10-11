@@ -17,7 +17,7 @@ class foreman {
   Class['foreman'] <- Class['tftpd']
 
   include foreman::params
-  include foreman::yumrepo
+  include foreman::repo
 
   package{'foreman':
     ensure => latest,
@@ -26,14 +26,17 @@ class foreman {
   }
   service{'foreman':
     hasstatus => true,
-    enable => !$foreman::params::passenger,
+    enable => $foreman::params::passenger ? {
+      true => false,
+      false => true,
+    },
     ensure => $foreman::params::passenger ? {
       true => stopped,
       false => running,
     },
   }
   user::managed{$foreman::params::user:
-    home => $foreman::params::app_root,
+    homedir => $foreman::params::app_root,
     managehome => false,
     shell => '/sbin/nologin',
     require => Package['foreman'],
@@ -61,6 +64,6 @@ class foreman {
     include foreman::reports
   }
   if $foreman::params::passenger {
-    include foreman::config::passenger
+    include foreman::passenger
   }
 }

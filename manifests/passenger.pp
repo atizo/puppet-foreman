@@ -6,7 +6,7 @@ class foreman::config::passenger {
   apache::vhost::generator{"${foreman::params::fqdn}.conf":
     http => {
       'ServerName' => $foreman::params::fqdn,
-      'DocumentRoot' => "$foreman::params::app_root/public";,
+      'DocumentRoot' => "$foreman::params::app_root/public",
       'RailsAutoDetect' => 'On',
       'AddDefaultCharset' => 'UTF-8',
     },
