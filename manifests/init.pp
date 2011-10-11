@@ -55,6 +55,7 @@ class foreman {
     command => "(cd $foreman::params::app_root && rake db:sessions:clear)",
     hour => '23',
     minute => '15',
+    require => User::Managed[$foreman::params::user],
   }
 
   if $foreman::params::enc {

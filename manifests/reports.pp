@@ -1,4 +1,5 @@
 class foreman::reports {
+  Class['foreman::reports'] <- Class['foreman::params']
   file{"$foreman::params::puppet_basedir/reports/foreman.rb":
     content => template("foreman/foreman-report.rb.erb"),
     owner => puppet, group => puppet, mode => 444;
