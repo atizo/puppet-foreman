@@ -21,7 +21,7 @@ class foreman {
 
   package{'foreman':
     ensure => latest,
-    require => Class['foreman::yumrepo'],
+    require => Class['foreman::repo'],
     notify => Service['foreman'],
   }
   service{'foreman':

@@ -30,6 +30,7 @@ class foreman::params(
   use_testing = true,
   railspath = '/usr/share',
   app_root = '$railspath/foreman',
+  rails_app_root = false,
   user = 'foreman',
   environment = 'production',
 
@@ -40,6 +41,11 @@ class foreman::params(
     $foreman_url = "https://$fqdn"
   } else {
     $foreman_url = "http://$fqdn"
+  }
+  if $rails_app_root {
+    $app_root = $rails_app_root
+  } else {
+    $app_root = "$railspath/foreman"
   }
   case $operatingsystem {
     redhat,centos,fedora: {
