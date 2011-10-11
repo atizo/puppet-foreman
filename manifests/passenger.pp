@@ -1,4 +1,4 @@
-class foreman::config::passenger {
+class foreman::passenger {
   Class['foreman::config::passenger'] <- Class['apache']
   Class['foreman::config::passenger'] <- Class['passenger']
   Class['foreman::config::passenger'] <- Class['foreman']
