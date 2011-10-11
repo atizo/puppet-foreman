@@ -1,11 +1,9 @@
-class foreman::passenger(
-  http_port => 80
-) {
+class foreman::passenger() {
   Class['foreman::passenger'] <- Class['::passenger']
   Class['foreman::passenger'] <- Class['foreman']
 
   apache::vhost::generator{"${foreman::params::fqdn}.conf":
-    http_port => $http_port,
+    http_port => $foreman::params::http_port,
     http => {
       'ServerName' => $foreman::params::fqdn,
       'DocumentRoot' => "$foreman::params::app_root/public",
