@@ -29,7 +29,6 @@ class foreman::params(
   # allow usage of test / RC rpms as well
   use_testing = true,
   railspath = '/usr/share',
-  app_root = '$railspath/foreman',
   rails_app_root = false,
   user = 'foreman',
   environment = 'production',
