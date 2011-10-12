@@ -8,13 +8,13 @@ class foreman::reports {
     'expire_old_reports':
       user => $foreman::params::user,
       env => "RAILS_ENV=$foreman::params::environment",
-      command => "(cd $foreman::params::app_root && $foreman::params::ruby_bin rake reports:expire)",
+      command => "(cd $foreman::params::app_root && $foreman::params::ruby_bins/rake reports:expire)",
       hour => 7,
       minute  => 30;
-    'daily summary':
+    'daily_summary':
       user => $foreman::params::user,
       env => "RAILS_ENV=$foreman::params::environment",
-      command => "(cd $foreman::params::app_root && $foreman::params::ruby_bin rake reports:summarize)",
+      command => "(cd $foreman::params::app_root && $foreman::params::ruby_bins/rake reports:summarize)",
       hour => 7,
       minute => 31;
   }
