@@ -52,7 +52,7 @@ class foreman {
   cron{'clear_session_table':
     user => $foreman::params::user,
     environment => "RAILS_ENV=$foreman::params::environment",
-    command => "(cd $foreman::params::app_root && rake db:sessions:clear)",
+    command => "(cd $foreman::params::app_root && $foreman::params::ruby_bin rake db:sessions:clear)",
     hour => '23',
     minute => '15',
     require => User::Managed[$foreman::params::user],

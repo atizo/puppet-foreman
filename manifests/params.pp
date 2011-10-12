@@ -27,6 +27,7 @@ class foreman::params(
 
   # advanced configuration - no need to change anything here by default
   # allow usage of test / RC rpms as well
+  ruby_bin = 'ruby',
   http_port = 80,
   use_testing = true,
   railspath = '/usr/share',
